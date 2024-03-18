@@ -18,7 +18,7 @@ public class WarmerDan40 implements IStep {
         System.out.println("Warmer dan 40: ja");
       }
 
-      return stepService.getStepByName(LangeBroekAan.NAME);
+      return stepService.getStepByName(KorteBroekAan.NAME);
     }else {
       if(state.isLoggingEnabled()){
         System.out.println("Warmer dan 40: nee");

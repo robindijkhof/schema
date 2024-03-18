@@ -5,7 +5,6 @@ import com.example.demo.StepperState;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static java.lang.StringTemplate.STR;
 
 @Component
 @AllArgsConstructor
@@ -20,6 +19,7 @@ public class InformeerBroek implements IStep {
     }
     System.out.println("Vandaag doen we mooi de " + state.getData().getBroeksoort() + " aan");
     System.out.println("Data: " + state.getData().toString());
+    System.out.println();
 
     return null;
 
