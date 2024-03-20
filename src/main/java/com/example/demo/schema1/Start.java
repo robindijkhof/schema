@@ -1,4 +1,4 @@
-package com.example.demo.steps;
+package com.example.demo.schema1;
 
 import com.example.demo.StepService;
 import com.example.demo.StepperState;

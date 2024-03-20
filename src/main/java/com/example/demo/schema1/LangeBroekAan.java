@@ -1,4 +1,4 @@
-package com.example.demo.steps;
+package com.example.demo.schema1;
 
 import com.example.demo.StepService;
 import com.example.demo.StepperState;
@@ -7,16 +7,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class KorteBroekAan implements IStep {
-  public final static String NAME = KorteBroekAan.class.getName();
+class LangeBroekAan implements IStep {
+  public final static String NAME = LangeBroekAan.class.getName();
 
 
   @Override
   public IStep doStep(StepperState state, StepService stepService) {
-    state.getData().setBroeksoort("Korte broek");
+    state.getData().setBroeksoort("Lange broek");
 
     return stepService.getStepByName(InformeerBroek.NAME);
-
   }
 
   @Override

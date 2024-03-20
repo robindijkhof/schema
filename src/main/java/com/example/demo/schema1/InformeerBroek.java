@@ -1,4 +1,4 @@
-package com.example.demo.steps;
+package com.example.demo.schema1;
 
 import com.example.demo.StepService;
 import com.example.demo.StepperState;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class InformeerBroek implements IStep {
+class InformeerBroek implements IStep {
   public final static String NAME = InformeerBroek.class.getName();
 
 
