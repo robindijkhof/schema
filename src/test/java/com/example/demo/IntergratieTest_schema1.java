@@ -19,7 +19,7 @@ public class IntergratieTest_schema1 {
 
   @Test
   public void test1(){
-    List<IStep> schemasteps = steps.stream().filter(x -> x.getClass().getPackage().getName().equals("com.example.demo.schema1")).toList();
+    List<IStep> schemasteps = steps.stream().filter(x -> x.getClass().getPackage().getName().equals("com.example.demo.schemas.schema1")).toList();
     StepService service = new StepService(schemasteps);
 
 
