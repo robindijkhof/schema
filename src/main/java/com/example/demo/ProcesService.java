@@ -2,8 +2,8 @@ package com.example.demo;
 
 import com.example.demo.model.Data;
 import com.example.demo.model.MockData;
-import com.example.demo.schema1.IStep;
-import com.example.demo.schema1.Start;
+import com.example.demo.schemas.IStep;
+import com.example.demo.schemas.schema1.Start;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.schema1.IStep;
+import com.example.demo.schemas.IStep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

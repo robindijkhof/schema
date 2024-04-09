@@ -1,12 +1,11 @@
 package com.example.demo;
 
 import com.example.demo.model.Data;
-import com.example.demo.schema1.IStep;
-import com.example.demo.schema1.Start;
+import com.example.demo.schemas.IStep;
+import com.example.demo.schemas.schema1.Start;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import java.util.List;
 

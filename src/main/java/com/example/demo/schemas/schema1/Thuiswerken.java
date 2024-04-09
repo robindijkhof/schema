@@ -1,13 +1,15 @@
-package com.example.demo.schema1;
+package com.example.demo.schemas.schema1;
 
 import com.example.demo.StepService;
 import com.example.demo.StepperState;
+import com.example.demo.schemas.IConditionalStep;
+import com.example.demo.schemas.IStep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-class Thuiswerken implements IStep {
+class Thuiswerken implements IConditionalStep {
   public final static String NAME = Thuiswerken.class.getName();
 
 
@@ -18,18 +20,28 @@ class Thuiswerken implements IStep {
         System.out.println("Is thuiswerken: ja");
       }
 
-      return stepService.getStepByName(KorteBroekAan.NAME);
+      return stepService.getStepByName(getPositiveStepName());
     } else {
       if (state.isLoggingEnabled()) {
         System.out.println("Is thuiswerken: nee");
       }
 
-      return stepService.getStepByName(LangeBroekAan.NAME);
+      return stepService.getStepByName(getNegativeStepName());
     }
   }
 
   @Override
   public String getStepName() {
     return NAME;
+  }
+
+  @Override
+  public String getPositiveStepName() {
+    return KorteBroekAan.NAME;
+  }
+
+  @Override
+  public String getNegativeStepName() {
+    return LangeBroekAan.NAME;
   }
 }

@@ -1,14 +1,16 @@
-package com.example.demo.schema1;
+package com.example.demo.schemas.schema1;
 
 import com.example.demo.StepService;
 import com.example.demo.StepperState;
+import com.example.demo.schemas.IProcesStep;
+import com.example.demo.schemas.IStep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @AllArgsConstructor
-class InformeerBroek implements IStep {
+class InformeerBroek implements IProcesStep {
   public final static String NAME = InformeerBroek.class.getName();
 
 
@@ -28,5 +30,10 @@ class InformeerBroek implements IStep {
   @Override
   public String getStepName() {
     return NAME;
+  }
+
+  @Override
+  public String getNextStepName() {
+    return null;
   }
 }
