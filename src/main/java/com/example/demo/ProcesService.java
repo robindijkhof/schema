@@ -27,7 +27,7 @@ public class ProcesService {
   }
 
   private void startFromStep(IStep step, Data data){
-    StepperState state = new StepperState(false, data);
+    StepperState state = new StepperState(true, data);
     int i = 1;
 
     IStep runningStep = step;

@@ -7,11 +7,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.util.ClassLoaderRepository;
@@ -127,9 +129,60 @@ public class Main {
 //        }
 //      }
 
-      System.out.println(diagram);
 
     }
+
+    System.out.println("te bekijken met mermaid.js");
+    System.out.println(diagram);
+    System.out.println();
+
+    String run = """
+      1 Starting step: com.example.demo.schemas.schema1.Start
+      Start
+      2 Starting step: com.example.demo.schemas.schema1.WarmerDan20
+      Warmer dan 20: nee
+      3 Starting step: com.example.demo.schemas.schema1.LangeBroekAan
+      4 Starting step: com.example.demo.schemas.schema1.InformeerBroek
+      Log broek soort aan
+      Vandaag doen we mooi de Lange broek aan
+      Data: Data{name='donderdag', temperature=3, workDay=true, alreadyOff=false, workingFromHome=false, broeksoort='Lange broek'}
+      """;
+
+    ArrayList<String> performedSteps = new ArrayList<>();
+
+    String[] lines = run.split("\n");
+    for (String line: lines) {
+      if(line.contains(" Starting step:")){
+        String step = line.split(" Starting step: ")[1];
+        performedSteps.add(step);
+        diagram += "style " + step + " fill:#f9f,stroke:#333,stroke-width:4px\n";
+      }
+    }
+
+    String[] diagramLines = diagram.split("\n");
+
+    ArrayList<Integer> perfomedLinkIndexes = new ArrayList<>();
+    for(int i = 0; i < performedSteps.size() - 1; i++) {
+      String stepStart = performedSteps.get(i);
+      String stepEnd = performedSteps.get(i + 1);
+
+      for(int j = 0; j < diagramLines.length; j++){
+        String diagramLine = diagramLines[j];
+        if(diagramLine.contains(stepStart) && diagramLine.contains(stepEnd)){
+          perfomedLinkIndexes.add(j - 1);
+        }
+      }
+    }
+
+
+    String performedLinks = perfomedLinkIndexes.stream()
+      .map(Object::toString)
+      .collect(Collectors.joining(","));
+    diagram += "linkStyle " + performedLinks + " stroke:orange";
+
+    System.out.println(diagram);
+
+
 
 
   }
