@@ -149,14 +149,27 @@ public class Main {
       """;
 
     ArrayList<String> performedSteps = new ArrayList<>();
+    String allTooltips = "";
+    String tooltip = "";
 
     String[] lines = run.split("\n");
     for (String line: lines) {
       if(line.contains(" Starting step:")){
+        if(!tooltip.equals("")){
+          allTooltips += "click " + performedSteps.getLast() + " call callback(\""+tooltip + "\") \" \"\n";
+          tooltip = "";
+        }
+
         String step = line.split(" Starting step: ")[1];
         performedSteps.add(step);
         diagram += "style " + step + " fill:#f9f,stroke:#333,stroke-width:4px\n";
+      } else{
+        tooltip += line + "%NEWLINE%";
       }
+    }
+
+    if(!tooltip.equals("")){
+      allTooltips += "click " + performedSteps.getLast() + " call callback(\""+tooltip + "\") \" \"\n";
     }
 
     String[] diagramLines = diagram.split("\n");
@@ -178,7 +191,8 @@ public class Main {
     String performedLinks = perfomedLinkIndexes.stream()
       .map(Object::toString)
       .collect(Collectors.joining(","));
-    diagram += "linkStyle " + performedLinks + " stroke:orange";
+    diagram += "linkStyle " + performedLinks + " stroke:orange\n";
+    diagram += allTooltips;
 
     System.out.println(diagram);
 

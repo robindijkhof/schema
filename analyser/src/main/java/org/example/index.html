@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script>
+</head>
+<body>
+<div id="info"></div>
+<pre class="mermaid">
+flowchart
+com.example.demo.schemas.schema1.AlVrij -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+com.example.demo.schemas.schema1.AlVrij -->|false| com.example.demo.schemas.schema1.Thuiswerken
+com.example.demo.schemas.schema1.KorteBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
+com.example.demo.schemas.schema1.WarmerDan40 -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+com.example.demo.schemas.schema1.WarmerDan40 -->|false| com.example.demo.schemas.schema1.Werkdag
+com.example.demo.schemas.schema1.InformeerBroek --> null
+com.example.demo.schemas.schema1.Werkdag -->|true| com.example.demo.schemas.schema1.AlVrij
+com.example.demo.schemas.schema1.Werkdag -->|false| com.example.demo.schemas.schema1.KorteBroekAan
+com.example.demo.schemas.schema1.Thuiswerken -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+com.example.demo.schemas.schema1.Thuiswerken -->|false| com.example.demo.schemas.schema1.LangeBroekAan
+com.example.demo.schemas.schema1.WarmerDan20 -->|true| com.example.demo.schemas.schema1.WarmerDan40
+com.example.demo.schemas.schema1.WarmerDan20 -->|false| com.example.demo.schemas.schema1.LangeBroekAan
+com.example.demo.schemas.schema1.LangeBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
+com.example.demo.schemas.schema1.Start --> com.example.demo.schemas.schema1.WarmerDan20
+style com.example.demo.schemas.schema1.Start fill:#f9f,stroke:#333,stroke-width:4px
+style com.example.demo.schemas.schema1.WarmerDan20 fill:#f9f,stroke:#333,stroke-width:4px
+style com.example.demo.schemas.schema1.LangeBroekAan fill:#f9f,stroke:#333,stroke-width:4px
+style com.example.demo.schemas.schema1.InformeerBroek fill:#f9f,stroke:#333,stroke-width:4px
+linkStyle 13,11,12 stroke:orange
+click com.example.demo.schemas.schema1.Start call callback("Start%NEWLINE%") " "
+click com.example.demo.schemas.schema1.WarmerDan20 call callback("Warmer dan 20: nee%NEWLINE%") " "
+click com.example.demo.schemas.schema1.InformeerBroek call callback("Log broek soort aan%NEWLINE%Vandaag doen we mooi de Lange broek aan%NEWLINE%Data: Data{name='donderdag', temperature=3, workDay=true, alreadyOff=false, workingFromHome=false, broeksoort='Lange broek'}%NEWLINE%") " "
+
+  </pre>
+
+<script>
+  window.callback = function (data) {
+      const block = document.getElementById("info");
+
+      const newline = "%NEWLINE%";
+
+      const lines = data.split(newline);
+
+      block.innerHTML = "";
+
+      for (const line of lines) {
+          const par = document.createElement("p");
+          par.innerHTML = line;
+          block.appendChild(par);
+      }
+  };
+  const config = {
+      startOnLoad: true,
+      flowchart: {useMaxWidth: true, htmlLabels: true, curve: 'cardinal'},
+      securityLevel: 'loose',
+  };
+  mermaid.initialize(config);
+</script>
+</body>
+</html>
