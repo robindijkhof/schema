@@ -4,35 +4,96 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script>
 </head>
 <body>
+<textarea style="width: 50%; height: 200px" id="log"></textarea>
+<button onclick="onProcess()" id="proces">proces</button>
+<button onclick="reset()" id="reset">reset</button>
 <div id="info"></div>
-<pre class="mermaid">
-flowchart
-com.example.demo.schemas.schema1.AlVrij -->|true| com.example.demo.schemas.schema1.KorteBroekAan
-com.example.demo.schemas.schema1.AlVrij -->|false| com.example.demo.schemas.schema1.Thuiswerken
-com.example.demo.schemas.schema1.KorteBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
-com.example.demo.schemas.schema1.WarmerDan40 -->|true| com.example.demo.schemas.schema1.KorteBroekAan
-com.example.demo.schemas.schema1.WarmerDan40 -->|false| com.example.demo.schemas.schema1.Werkdag
-com.example.demo.schemas.schema1.InformeerBroek --> null
-com.example.demo.schemas.schema1.Werkdag -->|true| com.example.demo.schemas.schema1.AlVrij
-com.example.demo.schemas.schema1.Werkdag -->|false| com.example.demo.schemas.schema1.KorteBroekAan
-com.example.demo.schemas.schema1.Thuiswerken -->|true| com.example.demo.schemas.schema1.KorteBroekAan
-com.example.demo.schemas.schema1.Thuiswerken -->|false| com.example.demo.schemas.schema1.LangeBroekAan
-com.example.demo.schemas.schema1.WarmerDan20 -->|true| com.example.demo.schemas.schema1.WarmerDan40
-com.example.demo.schemas.schema1.WarmerDan20 -->|false| com.example.demo.schemas.schema1.LangeBroekAan
-com.example.demo.schemas.schema1.LangeBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
-com.example.demo.schemas.schema1.Start --> com.example.demo.schemas.schema1.WarmerDan20
-style com.example.demo.schemas.schema1.Start fill:#f9f,stroke:#333,stroke-width:4px
-style com.example.demo.schemas.schema1.WarmerDan20 fill:#f9f,stroke:#333,stroke-width:4px
-style com.example.demo.schemas.schema1.LangeBroekAan fill:#f9f,stroke:#333,stroke-width:4px
-style com.example.demo.schemas.schema1.InformeerBroek fill:#f9f,stroke:#333,stroke-width:4px
-linkStyle 13,11,12 stroke:orange
-click com.example.demo.schemas.schema1.Start call callback("Start%NEWLINE%") " "
-click com.example.demo.schemas.schema1.WarmerDan20 call callback("Warmer dan 20: nee%NEWLINE%") " "
-click com.example.demo.schemas.schema1.InformeerBroek call callback("Log broek soort aan%NEWLINE%Vandaag doen we mooi de Lange broek aan%NEWLINE%Data: Data{name='donderdag', temperature=3, workDay=true, alreadyOff=false, workingFromHome=false, broeksoort='Lange broek'}%NEWLINE%") " "
-
-  </pre>
+<pre class="mermaid" id="mymermaid">
+  flowchart
+</pre>
 
 <script>
+  const plainDiagram =
+      ` flowchart
+        com.example.demo.schemas.schema1.AlVrij -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+        com.example.demo.schemas.schema1.AlVrij -->|false| com.example.demo.schemas.schema1.Thuiswerken
+        com.example.demo.schemas.schema1.KorteBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
+        com.example.demo.schemas.schema1.WarmerDan40 -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+        com.example.demo.schemas.schema1.WarmerDan40 -->|false| com.example.demo.schemas.schema1.Werkdag
+        com.example.demo.schemas.schema1.InformeerBroek --> null
+        com.example.demo.schemas.schema1.Werkdag -->|true| com.example.demo.schemas.schema1.AlVrij
+        com.example.demo.schemas.schema1.Werkdag -->|false| com.example.demo.schemas.schema1.KorteBroekAan
+        com.example.demo.schemas.schema1.Thuiswerken -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+        com.example.demo.schemas.schema1.Thuiswerken -->|false| com.example.demo.schemas.schema1.LangeBroekAan
+        com.example.demo.schemas.schema1.WarmerDan20 -->|true| com.example.demo.schemas.schema1.WarmerDan40
+        com.example.demo.schemas.schema1.WarmerDan20 -->|false| com.example.demo.schemas.schema1.LangeBroekAan
+        com.example.demo.schemas.schema1.LangeBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
+        com.example.demo.schemas.schema1.Start --> com.example.demo.schemas.schema1.WarmerDan20
+    `;
+
+  function onProcess() {
+      const run = document.getElementById("log").value;
+
+      let performedSteps = [];
+      let allTooltips = "";
+      let tooltip = "";
+      let diagram = plainDiagram;
+
+      const lines = run.split("\n");
+      lines.forEach(line => {
+        if (line.includes(" Starting step:")) {
+          if (tooltip !== "") {
+            allTooltips += `click ${performedSteps[performedSteps.length - 1]} call callback("${tooltip}") " "\n`;
+            tooltip = "";
+          }
+
+          const step = line.split(" Starting step: ")[1];
+          performedSteps.push(step);
+          diagram += `style ${step} fill:#f9f,stroke:#333,stroke-width:4px\n`;
+        } else {
+          tooltip += line + "%NEWLINE%";
+        }
+      });
+
+      if (tooltip !== "") {
+        allTooltips += `click ${performedSteps[performedSteps.length - 1]} call callback("${tooltip}") " "\n`;
+      }
+
+      const diagramLines = diagram.split("\n");
+
+      let perfomedLinkIndexes = [];
+      for (let i = 0; i < performedSteps.length - 1; i++) {
+        const stepStart = performedSteps[i];
+        const stepEnd = performedSteps[i + 1];
+
+        for (let j = 0; j < diagramLines.length; j++) {
+          const diagramLine = diagramLines[j];
+          if (diagramLine.includes(stepStart) && diagramLine.includes(stepEnd)) {
+            perfomedLinkIndexes.push(j - 1);
+          }
+        }
+      }
+
+      const performedLinks = perfomedLinkIndexes.join(",");
+      diagram += `linkStyle ${performedLinks} stroke:orange\n`;
+      diagram += allTooltips;
+
+      const element = document.querySelector('#mymermaid');
+      element.removeAttribute("data-processed");
+
+      element.innerHTML = diagram;
+      mermaid.run();
+
+  }
+
+  function reset() {
+      const element = document.querySelector('#mymermaid');
+      element.removeAttribute("data-processed");
+
+      element.innerHTML = plainDiagram;
+      mermaid.run();
+  }
+
   window.callback = function (data) {
       const block = document.getElementById("info");
 
