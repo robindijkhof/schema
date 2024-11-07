@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,16 +8,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Data {
-  String name;
+  String day;
   int temperature;
   boolean workDay;
   boolean alreadyOff;
   boolean workingFromHome;
 
-  String broeksoort;
-
-  public Data(String name, int temperature, boolean workDay, boolean alreadyOff, boolean workingFromHome) {
-    this.name = name;
+  public Data(String day, int temperature, boolean workDay, boolean alreadyOff, boolean workingFromHome) {
+    this.day = day;
     this.temperature = temperature;
     this.workDay = workDay;
     this.alreadyOff = alreadyOff;
@@ -28,12 +25,11 @@ public class Data {
   @Override
   public String toString() {
     return "Data{" +
-      "name='" + name + '\'' +
+      "name='" + day + '\'' +
       ", temperature=" + temperature +
       ", workDay=" + workDay +
       ", alreadyOff=" + alreadyOff +
       ", workingFromHome=" + workingFromHome +
-      ", broeksoort='" + broeksoort + '\'' +
       '}';
   }
 }

@@ -14,21 +14,16 @@ public class Start implements IProcesStep {
 
 
   @Override
-  public IStep doStep(StepperState state, StepService stepService) {
+  public void doStep(StepperState state) {
     if (state.isLoggingEnabled()) {
       System.out.println("Start");
     }
-
-    return stepService.getStepByName(getNextStepName());
   }
 
-  @Override
-  public String getStepName() {
-    return NAME;
-  }
+
 
   @Override
-  public String getNextStepName() {
-    return WarmerDan20.NAME;
+  public Class<? extends IStep> getNextStepClass() {
+    return WarmerDan20.class;
   }
 }

@@ -58,7 +58,7 @@ public class Imperative {
         if(state.isLoggingEnabled()){
             System.out.println("Log broek soort aan");
         }
-        System.out.println("Vandaag doen we mooi de " + state.getData().getBroeksoort() + " aan");
+        System.out.println("Vandaag doen we mooi de " + state.getBroeksoort() + " aan");
         System.out.println("Data: " + state.getData().toString());
         System.out.println();
 
@@ -66,7 +66,7 @@ public class Imperative {
     }
 
     public static void doKorteBroekAan(StepperState state){
-        state.data.setBroeksoort("Korte broek");
+        state.setBroeksoort("Korte broek");
 
         if(state.loggingEnabled){
             System.out.println("Stap: korte broek aan");
@@ -74,7 +74,7 @@ public class Imperative {
     }
 
     public static void doLangeBroekAan(StepperState state){
-        state.data.setBroeksoort("Lange broek");
+        state.setBroeksoort("Lange broek");
 
         if(state.loggingEnabled){
             System.out.println("Stap: lange broek aan");

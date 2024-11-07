@@ -14,20 +14,13 @@ class KorteBroekAan implements IProcesStep {
 
 
   @Override
-  public IStep doStep(StepperState state, StepService stepService) {
-    state.getData().setBroeksoort("Korte broek");
-
-    return stepService.getStepByName(getNextStepName());
-
+  public void doStep(StepperState state) {
+    state.setBroeksoort("Korte broek");
   }
 
-  @Override
-  public String getStepName() {
-    return NAME;
-  }
 
   @Override
-  public String getNextStepName() {
-    return InformeerBroek.NAME;
+  public Class<? extends IStep> getNextStepClass() {
+    return InformeerBroek.class;
   }
 }

@@ -11,4 +11,10 @@ import lombok.Setter;
 public class StepperState {
   boolean loggingEnabled;
   Data data;
+  String broeksoort;
+
+  public StepperState(boolean loggingEnabled, Data data){
+    this.loggingEnabled = loggingEnabled;
+    this.data = data;
+  }
 }

@@ -2,46 +2,42 @@ package com.example.demo.schemas.schema1;
 
 import com.example.demo.StepService;
 import com.example.demo.StepperState;
-import com.example.demo.schemas.IConditionalStep;
+import com.example.demo.schemas.IDecisionStep;
 import com.example.demo.schemas.IStep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-class WarmerDan40 implements IConditionalStep {
+class WarmerDan40 implements IDecisionStep {
   public final static String NAME = WarmerDan40.class.getName();
 
 
   @Override
-  public IStep doStep(StepperState state, StepService stepService) {
+  public boolean doStep(StepperState state) {
     if(state.getData().getTemperature() > 40 ){
       if(state.isLoggingEnabled()){
         System.out.println("Warmer dan 40: ja");
       }
 
-      return stepService.getStepByName(getPositiveStepName());
+      return true;
     }else {
       if(state.isLoggingEnabled()){
         System.out.println("Warmer dan 40: nee");
       }
 
-      return stepService.getStepByName(getNegativeStepName());
+      return true;
     }
   }
 
+
   @Override
-  public String getStepName() {
-    return NAME;
+  public Class<? extends IStep> getPositiveStepClass() {
+    return KorteBroekAan.class;
   }
 
   @Override
-  public String getPositiveStepName() {
-    return KorteBroekAan.NAME;
-  }
-
-  @Override
-  public String getNegativeStepName() {
-    return Werkdag.NAME;
+  public Class<? extends IStep> getNegativeStepClass() {
+    return Werkdag.class;
   }
 }

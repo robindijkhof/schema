@@ -11,7 +11,7 @@ import java.util.List;
 public class StepService {
   private final List<IStep> steps;
 
-  public IStep getStepByName(String name){
-    return steps.stream().filter(x -> x.getStepName().equals(name)).findFirst().orElseThrow(() -> new RuntimeException("Stap niet gevonden"));
+  public IStep getStepByClass(Class<? extends IStep> clazz){
+    return steps.stream().filter(x -> x.getClass() == clazz).findFirst().orElseThrow(() -> new RuntimeException("Stap niet gevonden: " + clazz.getName()));
   }
 }
