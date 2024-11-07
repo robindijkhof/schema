@@ -4,7 +4,7 @@ import com.example.demo.model.Data;
 import com.example.demo.model.MockData;
 import com.example.demo.schemas.ExitStep;
 import com.example.demo.schemas.IDecisionStep;
-import com.example.demo.schemas.IProcesStep;
+import com.example.demo.schemas.IProcessStep;
 import com.example.demo.schemas.IStep;
 import com.example.demo.schemas.schema1.Start;
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ public class ProcesService {
 
     IStep runningStep = startStep;
     while (!runningStep.getClass().equals(ExitStep.class)) {
-      if (runningStep instanceof IProcesStep step) {
+      if (runningStep instanceof IProcessStep step) {
         logStartStep(runningStep, i++);
         step.doStep(state);
         runningStep = stepService.getStepByClass(step.getNextStepClass());

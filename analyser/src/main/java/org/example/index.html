@@ -15,19 +15,19 @@
 <script>
   const plainDiagram =
       ` flowchart
-        com.example.demo.schemas.schema1.AlVrij -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+        com.example.demo.schemas.schema1.AlVrij -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
         com.example.demo.schemas.schema1.AlVrij -->|false| com.example.demo.schemas.schema1.Thuiswerken
-        com.example.demo.schemas.schema1.KorteBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
-        com.example.demo.schemas.schema1.WarmerDan40 -->|true| com.example.demo.schemas.schema1.KorteBroekAan
+        com.example.demo.schemas.schema1.AllemaalKorteBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
+        com.example.demo.schemas.schema1.WarmerDan40 -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
         com.example.demo.schemas.schema1.WarmerDan40 -->|false| com.example.demo.schemas.schema1.Werkdag
         com.example.demo.schemas.schema1.InformeerBroek --> null
         com.example.demo.schemas.schema1.Werkdag -->|true| com.example.demo.schemas.schema1.AlVrij
-        com.example.demo.schemas.schema1.Werkdag -->|false| com.example.demo.schemas.schema1.KorteBroekAan
-        com.example.demo.schemas.schema1.Thuiswerken -->|true| com.example.demo.schemas.schema1.KorteBroekAan
-        com.example.demo.schemas.schema1.Thuiswerken -->|false| com.example.demo.schemas.schema1.LangeBroekAan
+        com.example.demo.schemas.schema1.Werkdag -->|false| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
+        com.example.demo.schemas.schema1.Thuiswerken -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
+        com.example.demo.schemas.schema1.Thuiswerken -->|false| com.example.demo.schemas.schema1.AllemaalLangeBroekAan
         com.example.demo.schemas.schema1.WarmerDan20 -->|true| com.example.demo.schemas.schema1.WarmerDan40
-        com.example.demo.schemas.schema1.WarmerDan20 -->|false| com.example.demo.schemas.schema1.LangeBroekAan
-        com.example.demo.schemas.schema1.LangeBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
+        com.example.demo.schemas.schema1.WarmerDan20 -->|false| com.example.demo.schemas.schema1.AllemaalLangeBroekAan
+        com.example.demo.schemas.schema1.AllemaalLangeBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
         com.example.demo.schemas.schema1.Start --> com.example.demo.schemas.schema1.WarmerDan20
     `;
 

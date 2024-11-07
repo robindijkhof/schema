@@ -1,12 +1,12 @@
 package com.example.demo.schemas.schema1;
 
 import com.example.demo.StepperState;
-import com.example.demo.schemas.IProcessStep;
+import com.example.demo.schemas.IStartLoopStep;
 import com.example.demo.schemas.IStep;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LangeBroekAan implements IProcessStep {
+public class StartMemberLoop implements IStartLoopStep {
   @Override
   public void doStep(StepperState state) {
 
@@ -14,6 +14,6 @@ public class LangeBroekAan implements IProcessStep {
 
   @Override
   public Class<? extends IStep> getNextStepClass() {
-    return EndMemberLoop.class;
+    return Werkdag.class;
   }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.schemas.schema1;
 
-import com.example.demo.StepService;
 import com.example.demo.StepperState;
 import com.example.demo.schemas.IDecisionStep;
 import com.example.demo.schemas.IStep;
@@ -15,19 +14,21 @@ class Werkdag implements IDecisionStep {
 
   @Override
   public boolean doStep(StepperState state) {
-    if(state.getData().isWorkDay() ){
-      if(state.isLoggingEnabled()){
-        System.out.println("Is een werkdag: ja");
-      }
+//    if(state.getData().isWorkDay() ){
+//      if(state.isLoggingEnabled()){
+//        System.out.println("Is een werkdag: ja");
+//      }
+//
+//      return true;
+//    }else {
+//      if(state.isLoggingEnabled()){
+//        System.out.println("Is een werkdag: nee");
+//      }
+//
+//      return false;
+//    }
 
-      return true;
-    }else {
-      if(state.isLoggingEnabled()){
-        System.out.println("Is een werkdag: nee");
-      }
-
-      return false;
-    }
+    return true;
   }
 
 
@@ -39,6 +40,6 @@ class Werkdag implements IDecisionStep {
 
   @Override
   public Class<? extends IStep> getNegativeStepClass() {
-    return KorteBroekAan.class;
+    return AllemaalKorteBroekAan.class;
   }
 }

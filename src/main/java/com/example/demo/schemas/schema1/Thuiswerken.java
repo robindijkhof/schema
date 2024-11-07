@@ -1,6 +1,5 @@
 package com.example.demo.schemas.schema1;
 
-import com.example.demo.StepService;
 import com.example.demo.StepperState;
 import com.example.demo.schemas.IDecisionStep;
 import com.example.demo.schemas.IStep;
@@ -15,19 +14,21 @@ class Thuiswerken implements IDecisionStep {
 
   @Override
   public boolean doStep(StepperState state) {
-    if (state.getData().isWorkingFromHome()) {
-      if (state.isLoggingEnabled()) {
-        System.out.println("Is thuiswerken: ja");
-      }
+//    if (state.getData().isWorkingFromHome()) {
+//      if (state.isLoggingEnabled()) {
+//        System.out.println("Is thuiswerken: ja");
+//      }
+//
+//      return true;
+//    } else {
+//      if (state.isLoggingEnabled()) {
+//        System.out.println("Is thuiswerken: nee");
+//      }
+//
+//      return false;
+//    }
 
-      return true;
-    } else {
-      if (state.isLoggingEnabled()) {
-        System.out.println("Is thuiswerken: nee");
-      }
-
-      return false;
-    }
+    return true;
   }
 
 

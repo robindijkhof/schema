@@ -1,6 +1,5 @@
 package com.example.demo.schemas.schema1;
 
-import com.example.demo.StepService;
 import com.example.demo.StepperState;
 import com.example.demo.schemas.IDecisionStep;
 import com.example.demo.schemas.IStep;
@@ -37,6 +36,6 @@ class WarmerDan20 implements IDecisionStep {
 
   @Override
   public Class<? extends IStep> getNegativeStepClass() {
-    return LangeBroekAan.class;
+    return AllemaalLangeBroekAan.class;
   }
 }

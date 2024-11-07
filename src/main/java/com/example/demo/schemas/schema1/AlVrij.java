@@ -1,6 +1,5 @@
 package com.example.demo.schemas.schema1;
 
-import com.example.demo.StepService;
 import com.example.demo.StepperState;
 import com.example.demo.schemas.IDecisionStep;
 import com.example.demo.schemas.IStep;
@@ -16,19 +15,22 @@ public class AlVrij implements IDecisionStep {
 
   @Override
   public boolean doStep(StepperState state) {
-    if(state.getData().isAlreadyOff() ){
-      if(state.isLoggingEnabled()){
-        System.out.println("Is al vrij: ja");
-      }
+//    if(state.getData().isAlreadyOff() ){
+//      if(state.isLoggingEnabled()){
+//        System.out.println("Is al vrij: ja");
+//      }
+//
+//      return true;
+//    }else {
+//      if(state.isLoggingEnabled()){
+//        System.out.println("Is al vrij: nee");
+//      }
+//
+//      return false;
+//    }
 
-      return true;
-    }else {
-      if(state.isLoggingEnabled()){
-        System.out.println("Is al vrij: nee");
-      }
 
-      return false;
-    }
+    return true;
   }
 
 
