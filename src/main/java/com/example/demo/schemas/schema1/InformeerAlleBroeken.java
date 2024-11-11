@@ -1,9 +1,8 @@
 package com.example.demo.schemas.schema1;
 
-import com.example.demo.StepService;
 import com.example.demo.StepperState;
 import com.example.demo.schemas.ExitStep;
-import com.example.demo.schemas.IProcesStep;
+import com.example.demo.schemas.IProcessStep;
 import com.example.demo.schemas.IStep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-class InformeerBroek implements IProcesStep {
-  public final static String NAME = InformeerBroek.class.getName();
+class InformeerAlleBroeken implements IProcessStep {
+  public final static String NAME = InformeerAlleBroeken.class.getName();
 
 
   @Override
@@ -20,7 +19,8 @@ class InformeerBroek implements IProcesStep {
     if(state.isLoggingEnabled()){
       System.out.println("Log broek soort aan");
     }
-    System.out.println("Vandaag doen we mooi de " + state.getBroeksoort() + " aan");
+    System.out.println("Welke broeken doen we aan:");
+    state.getBroekResultaat().forEach((x,y) -> System.out.println(x + ": " + y));
     System.out.println("Data: " + state.getData().toString());
     System.out.println();
 

@@ -4,32 +4,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class Data {
   String day;
   int temperature;
-  boolean workDay;
-  boolean alreadyOff;
-  boolean workingFromHome;
+  List<Member> members = new ArrayList<>();
 
-  public Data(String day, int temperature, boolean workDay, boolean alreadyOff, boolean workingFromHome) {
+  public Data(String day, int temperature, List<Member> members) {
     this.day = day;
     this.temperature = temperature;
-    this.workDay = workDay;
-    this.alreadyOff = alreadyOff;
-    this.workingFromHome = workingFromHome;
+    this.members = members;
   }
+
 
   @Override
   public String toString() {
     return "Data{" +
-      "name='" + day + '\'' +
+      "day='" + day + '\'' +
       ", temperature=" + temperature +
-      ", workDay=" + workDay +
-      ", alreadyOff=" + alreadyOff +
-      ", workingFromHome=" + workingFromHome +
+      ", members=" + members +
       '}';
   }
 }
