@@ -2,6 +2,9 @@ package com.example.demo;
 import com.example.demo.schemas.IDecisionStep;
 import com.example.demo.schemas.IProcessStep;
 import com.example.demo.schemas.IStep;
+import com.example.demo.schemas.loops.ILoopedDecisionStep;
+import com.example.demo.schemas.loops.ILoopedProcessStep;
+import com.example.demo.schemas.loops.IStartLoopStep;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -26,7 +29,26 @@ public class VisualisationService {
 
           diagram.append(createNode(step)).append(" --> ").append(createNode(nextStep)).append("\n");
         }
+        case IStartLoopStep decisionStep -> {
+          IStep positiveStep = stepService.getStepByClass(decisionStep.getPositiveStepClass());
+          IStep negativeStep = stepService.getStepByClass(decisionStep.getNegativeStepClass());
+
+          diagram.append(createNode(step)).append(" -->|loop enter| ").append(createNode(positiveStep)).append("\n");
+          diagram.append(createNode(step)).append(" -->|loop exit| ").append(createNode(negativeStep)).append("\n");
+        }
         case IDecisionStep decisionStep -> {
+          IStep positiveStep = stepService.getStepByClass(decisionStep.getPositiveStepClass());
+          IStep negativeStep = stepService.getStepByClass(decisionStep.getNegativeStepClass());
+
+          diagram.append(createNode(step)).append(" -->|true| ").append(createNode(positiveStep)).append("\n");
+          diagram.append(createNode(step)).append(" -->|false| ").append(createNode(negativeStep)).append("\n");
+        }
+        case ILoopedProcessStep processStep -> {
+          IStep nextStep = stepService.getStepByClass(processStep.getNextStepClass());
+
+          diagram.append(createNode(step)).append(" --> ").append(createNode(nextStep)).append("\n");
+        }
+        case ILoopedDecisionStep decisionStep -> {
           IStep positiveStep = stepService.getStepByClass(decisionStep.getPositiveStepClass());
           IStep negativeStep = stepService.getStepByClass(decisionStep.getNegativeStepClass());
 

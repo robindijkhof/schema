@@ -15,20 +15,26 @@
 <script>
   const plainDiagram =
       ` flowchart
-        com.example.demo.schemas.schema1.AlVrij -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
-        com.example.demo.schemas.schema1.AlVrij -->|false| com.example.demo.schemas.schema1.Thuiswerken
-        com.example.demo.schemas.schema1.AllemaalKorteBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
-        com.example.demo.schemas.schema1.WarmerDan40 -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
-        com.example.demo.schemas.schema1.WarmerDan40 -->|false| com.example.demo.schemas.schema1.Werkdag
-        com.example.demo.schemas.schema1.InformeerBroek --> null
-        com.example.demo.schemas.schema1.Werkdag -->|true| com.example.demo.schemas.schema1.AlVrij
-        com.example.demo.schemas.schema1.Werkdag -->|false| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
-        com.example.demo.schemas.schema1.Thuiswerken -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan
-        com.example.demo.schemas.schema1.Thuiswerken -->|false| com.example.demo.schemas.schema1.AllemaalLangeBroekAan
-        com.example.demo.schemas.schema1.WarmerDan20 -->|true| com.example.demo.schemas.schema1.WarmerDan40
-        com.example.demo.schemas.schema1.WarmerDan20 -->|false| com.example.demo.schemas.schema1.AllemaalLangeBroekAan
-        com.example.demo.schemas.schema1.AllemaalLangeBroekAan --> com.example.demo.schemas.schema1.InformeerBroek
-        com.example.demo.schemas.schema1.Start --> com.example.demo.schemas.schema1.WarmerDan20
+        com.example.demo.schemas.ExitStep["ExitStep"] --> ???
+        com.example.demo.schemas.schema1.AlVrij["AlVrij"] -->|true| com.example.demo.schemas.schema1.KorteBroekAan["KorteBroekAan"]
+        com.example.demo.schemas.schema1.AlVrij["AlVrij"] -->|false| com.example.demo.schemas.schema1.Thuiswerken["Thuiswerken"]
+        com.example.demo.schemas.schema1.AllemaalKorteBroekAan["AllemaalKorteBroekAan"] --> com.example.demo.schemas.schema1.InformeerAlleBroeken["InformeerAlleBroeken"]
+        com.example.demo.schemas.schema1.AllemaalLangeBroekAan["AllemaalLangeBroekAan"] --> com.example.demo.schemas.schema1.InformeerAlleBroeken["InformeerAlleBroeken"]
+        com.example.demo.schemas.schema1.EndMemberLoop["EndMemberLoop"] --> com.example.demo.schemas.schema1.StartMemberLoop{{"StartMemberLoop"}}
+        com.example.demo.schemas.schema1.InformeerAlleBroeken["InformeerAlleBroeken"] --> com.example.demo.schemas.ExitStep["ExitStep"]
+        com.example.demo.schemas.schema1.KorteBroekAan["KorteBroekAan"] --> com.example.demo.schemas.schema1.EndMemberLoop["EndMemberLoop"]
+        com.example.demo.schemas.schema1.LangeBroekAan["LangeBroekAan"] --> com.example.demo.schemas.schema1.EndMemberLoop["EndMemberLoop"]
+        com.example.demo.schemas.schema1.Start["Start"] --> com.example.demo.schemas.schema1.WarmerDan20{{"WarmerDan20"}}
+        com.example.demo.schemas.schema1.StartMemberLoop{{"StartMemberLoop"}} -->|loop enter| com.example.demo.schemas.schema1.Werkdag["Werkdag"]
+        com.example.demo.schemas.schema1.StartMemberLoop{{"StartMemberLoop"}} -->|loop exit| com.example.demo.schemas.schema1.InformeerAlleBroeken["InformeerAlleBroeken"]
+        com.example.demo.schemas.schema1.Thuiswerken["Thuiswerken"] -->|true| com.example.demo.schemas.schema1.KorteBroekAan["KorteBroekAan"]
+        com.example.demo.schemas.schema1.Thuiswerken["Thuiswerken"] -->|false| com.example.demo.schemas.schema1.LangeBroekAan["LangeBroekAan"]
+        com.example.demo.schemas.schema1.WarmerDan20{{"WarmerDan20"}} -->|true| com.example.demo.schemas.schema1.WarmerDan40{{"WarmerDan40"}}
+        com.example.demo.schemas.schema1.WarmerDan20{{"WarmerDan20"}} -->|false| com.example.demo.schemas.schema1.AllemaalLangeBroekAan["AllemaalLangeBroekAan"]
+        com.example.demo.schemas.schema1.WarmerDan40{{"WarmerDan40"}} -->|true| com.example.demo.schemas.schema1.AllemaalKorteBroekAan["AllemaalKorteBroekAan"]
+        com.example.demo.schemas.schema1.WarmerDan40{{"WarmerDan40"}} -->|false| com.example.demo.schemas.schema1.StartMemberLoop{{"StartMemberLoop"}}
+        com.example.demo.schemas.schema1.Werkdag["Werkdag"] -->|true| com.example.demo.schemas.schema1.AlVrij["AlVrij"]
+        com.example.demo.schemas.schema1.Werkdag["Werkdag"] -->|false| com.example.demo.schemas.schema1.KorteBroekAan["KorteBroekAan"]
     `;
 
   function onProcess() {

@@ -1,25 +1,20 @@
 package com.example.demo.schemas.schema1;
 
 import com.example.demo.StepperState;
-import com.example.demo.schemas.IEndLoopStep;
-import com.example.demo.schemas.IStartLoopStep;
 import com.example.demo.schemas.IStep;
+import com.example.demo.schemas.loops.IEndLoopStep;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EndMemberLoop implements IEndLoopStep {
+
   @Override
-  public Class<? extends IStartLoopStep> getLoopStartStep() {
+  public void doStep(StepperState state, int index) {
+
+  }
+
+  @Override
+  public Class<? extends IStep> getNextStepClass() {
     return StartMemberLoop.class;
-  }
-
-  @Override
-  public Class<? extends IStep> getLoopAfterEndStep() {
-    return InformeerBroek.class;
-  }
-
-  @Override
-  public boolean endLoop(StepperState state) {
-    return false;
   }
 }

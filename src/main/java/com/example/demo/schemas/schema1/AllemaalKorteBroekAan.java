@@ -23,6 +23,6 @@ class AllemaalKorteBroekAan implements IProcessStep {
 
   @Override
   public Class<? extends IStep> getNextStepClass() {
-    return InformeerBroek.class;
+    return InformeerAlleBroeken.class;
   }
 }

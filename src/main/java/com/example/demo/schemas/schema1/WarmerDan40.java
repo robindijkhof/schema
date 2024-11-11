@@ -25,7 +25,7 @@ class WarmerDan40 implements IDecisionStep {
         System.out.println("Warmer dan 40: nee");
       }
 
-      return true;
+      return false;
     }
   }
 

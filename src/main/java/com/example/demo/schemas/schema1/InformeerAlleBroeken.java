@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-class InformeerBroek implements IProcessStep {
-  public final static String NAME = InformeerBroek.class.getName();
+class InformeerAlleBroeken implements IProcessStep {
+  public final static String NAME = InformeerAlleBroeken.class.getName();
 
 
   @Override

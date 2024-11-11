@@ -24,12 +24,12 @@ public class MockData {
 
   public static List<Data> getMockData(){
     return List.of(
-      new Data("maandag", 21, List.of(new Member("bob", true, false, false), new Member("alice", true, false, true))),
-      new Data("dinsdag", 20, List.of()),
-      new Data("woensdag", 45, List.of()),
-      new Data("donderdag", 3, List.of()),
-      new Data("vrijdag", 21, List.of()),
-      new Data("zaterdag", 19, List.of())
+      new Data("maandag", 21, List.of(new Member("bob", true, false, false), new Member("alice", true, false, true)))
+//      new Data("dinsdag", 20, List.of()),
+//      new Data("woensdag", 45, List.of()),
+//      new Data("donderdag", 3, List.of()),
+//      new Data("vrijdag", 21, List.of()),
+//      new Data("zaterdag", 19, List.of())
     );
   }
 }
